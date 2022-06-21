@@ -1,0 +1,75 @@
+.UIPanel_Regular
+{
+	position: absolute;
+	top: 5%;
+	left: 15%;
+	transform: translate(-50%,-50%);
+	font-family: Space Age;
+	color: lightgreen;
+	user-select: none;
+	font-size: 2.5rem;
+	transition: 0.5s;
+	text-shadow: 0 0 10px silver, 0 0 40px silver, 0 0 20px silver, 0 0 40px silver, 0 0 10px silver;
+}
+
+/*Diffrent Class Styles.................................................................................................*/
+.UIPanel_Small
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	user-select: none;
+	width: 40%;
+	height: 40%;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	font-family: sectar;
+	transition: 0.5s;
+	background: lightblue;
+}
+.UIPanel_Medium
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	user-select: none;
+	width: 75%;
+	height: 75%;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	font-family: sectar;
+	transition: 0.5s;
+	background: lightblue;
+}
+.UIPanel_Large
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	user-select: none;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+	font-family: sectar;
+	transition: 0.5s;
+	background: lightblue;
+}
+
+.UIPanel_Small:hover
+{
+	transition: 0.5s;
+	box-shadow: 0 0 10px lightgreen, 0 0 20px lightgreen, 0 0 30px lightgreen, 0 0 20px lightgreen, 0 0 10px lightgreen;
+}
+
+.UIPanel_Medium:hover
+{
+	transition: 0.5s;
+	box-shadow: 0 0 20px lightgreen, 0 0 40px lightgreen, 0 0 60px lightgreen, 0 0 40px lightgreen, 0 0 20px lightgreen;
+}

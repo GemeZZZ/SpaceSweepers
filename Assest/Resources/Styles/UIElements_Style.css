@@ -1,0 +1,160 @@
+/*Main Heading Under Diffrent Class..............................................................................................*/
+.UIPanel_Small .TextStyle_mainHeading
+{
+	position: absolute;
+	top: 5%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	font-size: 2rem;
+	transition: 0.5s;
+	user-select: none;
+}
+.UIPanel_Medium .TextStyle_mainHeading
+{
+	position: absolute;
+	top: 5%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	font-size: 3.5rem;
+	transition: 0.5s;
+	width: 100%;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	user-select: none;	
+}
+.UIPanel_Large .TextStyle_mainHeading
+{
+	position: absolute;
+	top: 5%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	font-size: 4.5rem;
+	transition: 0.5s;
+	user-select: none;	
+}
+
+.UIPanel_Small .TextStyle_mainHeading:hover
+{
+	letter-spacing: 3px;
+	transition: 0.5s;
+	text-shadow: 0 0 10px red, 0 0 40px red, 0 0 20px red, 0 0 40px red, 0 0 10px red;
+}
+.UIPanel_Medium .TextStyle_mainHeading:hover
+{
+	letter-spacing: 4px;
+	transition: 0.5s;
+	text-shadow: 0 0 10px red, 0 0 40px red, 0 0 20px red, 0 0 40px red, 0 0 10px red;
+}
+.UIPanel_Large .TextStyle_mainHeading:hover
+{
+	letter-spacing: 5px;
+	transition: 0.5s;
+	text-shadow: 0 0 10px red, 0 0 40px red, 0 0 20px red, 0 0 40px red, 0 0 10px red;
+}
+
+/*Diffrent Types Of Button Styles*/
+.UIPanel_Large .ElementStyle_button
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	color: black;
+	width: 35%;
+	height: auto;
+	padding: 5px;
+	border: 2px solid black;
+	border-radius: 100px;
+	cursor: pointer;
+	font-size: 2rem;
+	transition: 0.5s;
+	user-select: none;
+}
+.UIPanel_Medium .ElementStyle_button
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	color: black;
+	width: 35%;
+	height: auto;
+	padding: 5px;
+	border: 2px solid black;
+	border-radius: 100px;
+	cursor: pointer;
+	font-size: 1.99rem;
+	transition: 0.5s;
+	user-select: none;
+}
+.UIPanel_Small .ElementStyle_button
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	color: black;
+	width: 35%;
+	height: auto;
+	padding: 5px;
+	border: 2px solid black;
+	border-radius: 100px;
+	cursor: pointer;
+	font-size: 0.99rem;
+	transition: 0.5s;
+	user-select: none;
+}
+.ElementStyle_button:hover
+{
+	letter-spacing: 5px;
+	width: 45%;
+	height: auto;
+	transition: 0.5s;
+	color: red;
+	border: 2px solid red;
+	background: black;
+	box-shadow: 0 0 10px silver, 0 0 30px silver, 0 0 20px silver, 0 0 30px silver, 0 0 10px silver;
+}
+
+.TextStyle_mainBody
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	font-family: sectar;
+	font-size: 1.8rem;
+	color: black;
+	user-select: none;
+	transition: 0.5s;
+	user-select: none;
+}
+
+.ElementStyle_inputBox
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	color: black;
+	border: 2px solid black;
+	border-radius: 100px;
+	width: 30%;
+	font-size: 1.8rem;
+	font-family: sectar;
+	justify-content: center;
+	text-align: center;
+	background: transparent;
+	transition: 0.5s;
+}
+
+.ElementStyle_inputBox:focus
+{
+	transition: 0.5s;
+	width: 50%;
+	color: red;
+	border: 2px solid red;
+	background: black;
+	box-shadow: 0 0 10px silver, 0 0 30px silver, 0 0 20px silver, 0 0 30px silver, 0 0 10px silver;
+}

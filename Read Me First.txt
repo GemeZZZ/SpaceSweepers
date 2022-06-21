@@ -1,0 +1,32 @@
+<ALERT>
+
+Be sure to install useful fonts from "Useful Fonts" folder...There are
+two fonts in there..."Sectar" And "Space Age"...
+
+<ALERT>
+
+This is SPACE SWEEPERS...
+Made by - Henil Mistry(All Coding Part + Animation)
+Contact - henilmistry74496@gmail.com (email)
+	  @_henu_2508_ (instagram)
+	  @HenuMistry  (Twitter)
+this game idea is inspired from other games which was played by me..
+such as "PLATYPUS"...
+
+Credits -
+i would like to give some credits for sprite sheet makers...
+for all sprites...which was found by me on internet for free of cost
+from 
+GameArt2D..
+
+Some Information...
+-->Nice Enemy Motion Animation
+-->Nice Powerups For Player
+-->Nice Spaceships For Player
+-->Save & Load System
+-->Shop System (For Spaceship)
+-->Upgrade System (For Powerups)
+-->Nice SFX
+-->Nice Background Animation Of Starts & Planets...
+
+-->Be the first to travel through diffrent planets and defeat enemy

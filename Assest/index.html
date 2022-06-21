@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>ROCK SMASHER</title>
+	<link rel="stylesheet" type="text/css" href="Resources/Styles/UIPanels_Style.css">
+	<link rel="stylesheet" type="text/css" href="Resources/Styles/UIElements_Style.css">
+	<style type="text/css">
+		*
+		{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		::-webkit-scrollbar
+		{
+			opacity: 0;
+			width: 0;
+		}
+		#scoreUI
+		{
+			position: absolute;
+			top: 5%;
+			left: 15%;
+			transform: translate(-50%,-50%);
+			color: lightgreen;
+			font-family: Space Age;
+			font-size: 2.5rem;
+			font-weight: bolder;
+		}
+		#ESC_notice
+		{
+			width: 50%;
+			left: 75%;
+		}
+		#pauseUI
+		{
+			background: rgba(255,255,255,0.5);
+			top: -100%;
+		}
+		#pause_mainHeading
+		{
+			top: 20%;
+			transition: 0.5s;
+		}
+		#pause_exitBtn
+		{
+			top: 70%;
+		}
+		#go_btn_save
+		{
+			top: 65%;
+		}
+		#go_btn_menu
+		{
+			top: 80%;
+		}
+		#go_btn_restart
+		{
+			top: 95%;
+		}
+		#go_mainBody
+		{
+			top: 30%;
+			width: 100%;
+			justify-content: center;
+			text-align: center;
+			align-items: center;
+		}
+		#gameOverUI
+		{
+			top: -100%;
+		}
+		#go_mainHeading:hover
+		{
+			text-shadow: 0 0 10px silver, 0 0 40px silver, 0 0 20px silver, 0 0 40px silver, 0 0 10px silver;
+		}
+		#ip_btn_play
+		{
+			top: 70%;
+		}
+		#ip_btn_how
+		{
+			top: 85%;
+		}
+		#ip_mainBody
+		{
+			top: 40%;
+		}
+		#ip_mainHeading:hover
+		{
+			letter-spacing: 2px;
+			text-shadow: 0 0 10px silver, 0 0 40px silver, 0 0 20px silver, 0 0 40px silver, 0 0 10px silver;
+		}
+</style>
+</head>
+<body>
+
+<div class="UIPanel_Medium" id="info_panel">
+	<h1 class="TextStyle_mainHeading" id="ip_mainHeading">SPACE SWEEPERS</h1>
+	<p class="TextStyle_mainBody" id="ip_mainBody">
+		IF YOU ARE READY , HIT PLAY OTHERWISE YOU CAN CLICK ON HOW TO PLAY TO KNOW MORE!
+	</p>
+	<span class="ElementStyle_button" id="ip_btn_play">PLAY</span>
+	<span class="ElementStyle_button" id="ip_btn_how">HOW TO PLAY</span>
+</div>
+<div class="UIPanel_Medium" id="pauseUI">
+	<h1 class="TextStyle_mainHeading" id="pause_mainHeading">GAME IS PAUSED</h1>
+	<span class="ElementStyle_button" id="pause_resumeBtn">RESUME</span>
+	<span class="ElementStyle_button" id="pause_exitBtn">EXIT TO MAIN MENU</span>
+</div>
+<div class="UIPanel_Medium" id="gameOverUI">
+	<h1 class="TextStyle_mainHeading" id="go_mainHeading">GAME OVER</h1>
+	<br>
+	<p class="TextStyle_mainBody" id="go_mainBody">
+		YOUR SCORE : 12500<br>
+		GOLD COIN : 50<br>
+		SILVER COIN : 50<br>
+		BRONZE COIN : 80<br>
+	</p>
+	<br>
+	<input type="" name="" placeholder="ENTER YOUR NAME HERE" class="ElementStyle_inputBox" id="input_box" required="">
+	<span class="ElementStyle_button" id="go_btn_save">SAVE MY SCORE</span>
+	<span class="ElementStyle_button" id="go_btn_menu">RETURN TO MAIN MENU</span>
+	<span class="ElementStyle_button" id="go_btn_restart">RESTART GAME</span>
+</div>
+<div class="UIPanel_Regular" id="scoreUI"></div>
+<div class="UIPanel_Regular" id="ESC_notice">PRESS 'Esc' Key To Pause</div>
+
+<canvas>CANVAS IS NOT SUPPORTED IN YOUR BROWSER!!</canvas>
+
+</body>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.1/gsap.min.js" integrity="sha512-cdV6j5t5o24hkSciVrb8Ki6FveC2SgwGfLE31+ZQRHAeSRxYhAQskLkq3dLm8ZcWe1N3vBOEYmmbhzf7NTtFFQ==" crossorigin="anonymous"></script>-->
+<script src="Resources/Scripts/forLocalStorage.js"></script>
+<script src="Resources/Scripts/forSprites_templet.js"></script>
+<script src="Resources/Scripts/forRock_class.js"></script>
+<script src="Resources/Scripts/forBullet_class.js"></script>
+<script src="Resources/Scripts/forParticles_class.js"></script>
+<script src="Resources/Scripts/forEffect_class.js"></script>
+<script src="Resources/Scripts/forStars_class.js"></script>
+<script src="Resources/Scripts/forPlanets_class.js"></script>
+<script src="Resources/Scripts/forMissle_class.js"></script>
+<script src="Resources/Scripts/forAlienShip_class.js"></script>
+<script src="Resources/Scripts/forExplosionEffect_class.js"></script>
+<script src="Resources/Scripts/forTextAnimation_class.js"></script>
+<script src="Resources/Scripts/forFlyingCoins_class.js"></script>
+<script src="Resources/Scripts/forPowerUps_class.js"></script>
+<script type="text/javascript">
+
+//To access the canvas...................................................................................
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
+
+//Setting Some Basic Properties Of Canvas................................................................
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+c.fillStyle = 'rgba(0, 0, 0, 0.9)';
+c.clearRect(0,0,canvas.width,canvas.height);
+c.fillRect(0,0,canvas.width,canvas.height);
+
+let ship = new Image();
+
+let _IS_LOGGED_IN = localStorage.getItem("_IS_LOGGED_IN");
+
+if(_IS_LOGGED_IN=="true")
+{
+	let _CURRENT_PLAYER = JSON.parse(localStorage.getItem("_CURRENT_PLAYER"));
+	if(_CURRENT_PLAYER._CURRENT_SHIP=="default")
+	{
+		ship.src="Resources/Spritesheets/spaceship/defaultShip.png";		
+	}
+	else if(_CURRENT_PLAYER._CURRENT_SHIP=="ship0")
+	{
+		ship.src="Resources/Spritesheets/spaceship/defaultShip2.png";
+	}
+	else if(_CURRENT_PLAYER._CURRENT_SHIP=="ship1")
+	{
+		ship.src="Resources/Spritesheets/spaceship/ship2.png";
+	}
+	else if(_CURRENT_PLAYER._CURRENT_SHIP=="ship2")
+	{
+		ship.src="Resources/Spritesheets/spaceship/ship3.png";	
+	}
+	else if(_CURRENT_PLAYER._CURRENT_SHIP=="ship3")
+	{
+		ship.src="Resources/Spritesheets/spaceship/ship4.png";		
+	}
+	else
+	{
+		ship.src="Resources/Spritesheets/spaceship/ship5.png";		
+	}
+}
+else
+{
+	ship.src="Resources/Spritesheets/spaceship/defaultShip.png";
+}
+
+//Global Variables Are Here..............................................................................
+let mouse = {
+	x: undefined,
+	y: undefined
+}
+let gameFrame = 0;
+let animID;
+let rock_spawn_animID;
+let rocksArray = [];
+let bulletsArray = [];
+let particlesArray = [];
+let sparkelEffectArray = [];
+let starsArray = [];
+let alienShipArray = [];
+let alienMissleArray = [];
+let explosionArray = [];
+let comboArray = [];
+let animatedTxtArray = [];
+let flyingCoinsArray = [];
+let powerUpsArray = [];
+let powerUpsEffectArray = [];
+let angle = 0;
+let reverseAngle = 0;
+let isGameOver = false;
+let isPaused = false;
+let isSheildActive = false;
+let isExtraPoints = false;
+let isMorePower = false;
+let extraPoints = _GAME_PLAYER_DATA._POWERUPS_UPGRADE[2]._EXTRA_POINTS;
+let power = _GAME_PLAYER_DATA._POWERUPS_UPGRADE[1]._POWER;
+let gameScore = 0;
+let goldCoinCollected=0;
+let silverCoinCollected=0;
+let bronzeCoinCollected=0;
+
+let scoreUIPanel = document.getElementById('scoreUI');
+let pauseUIPanel = document.getElementById('pauseUI');
+//pauseUIPanel.style.display = "none";
+let ESC_notice = document.getElementById('ESC_notice');
+let pause_resumeBtn = document.getElementById('pause_resumeBtn');
+let pause_exitBtn = document.getElementById('pause_exitBtn'); 
+
+let gameOverUIPanel = document.getElementById('gameOverUI');
+let go_btn_save = document.getElementById('go_btn_save');
+let go_btn_restart = document.getElementById('go_btn_restart');
+let go_btn_menu = document.getElementById('go_btn_menu');
+let go_mainBody = document.getElementById('go_mainBody');
+
+let info_panel = document.getElementById('info_panel');
+let ip_btn_play = document.getElementById('ip_btn_play');
+let ip_btn_how = document.getElementById('ip_btn_how');
+let input_box = document.getElementById('input_box');
+
+pause_exitBtn.addEventListener('click',() => {
+	window.location = "../Space Sweepers.html";
+	mouseDown.play();
+});
+pause_exitBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+pause_resumeBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+
+go_btn_menu.addEventListener('click',()=>{
+	mouseDown.play();
+	window.location = "../Space Sweepers.html";
+});
+go_btn_menu.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+go_btn_restart.addEventListener('click',()=>{
+	mouseDown.play();
+	window.location="index.html";
+});
+go_btn_restart.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+go_btn_save.addEventListener('click',()=>{
+	var name = input_box.value;
+	if(name.trim()==""||name=="")
+	{
+		alert("You cannot save your profile name with only space! Please enter some name!");
+	}
+	else
+	{
+		if(!isSaved)
+		{
+			_SAVE_DATA(name);
+		}
+		else
+		{
+			alert("You have saved your profile once! Now, You need to replay game to save your SCORE again!");
+		}
+	}
+	mouseDown.play();
+});
+go_btn_save.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+
+ip_btn_how.addEventListener('click',()=>{
+	mouseDown.play();
+});
+ip_btn_how.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+ip_btn_play.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+
+//All audio are here..............................................................................................
+let bgMusic = new Audio();
+bgMusic.src = "Resources/Sounds/music3.mp3";
+bgMusic.volume = 1;
+let laser = new Audio();
+laser.src = "Resources/Sounds/laser2.mp3";
+laser.volume = 0.1;
+let explosion_mini = new Audio();
+explosion_mini.src="Resources/Sounds/explosion1.mp3";
+explosion_mini.volume = 0.8;
+let explosion_large = new Audio();
+explosion_large.src="Resources/Sounds/explosion.mp3";
+explosion_large.volume = 0.8;
+let explosion_large_vol2 = new Audio();
+explosion_large_vol2.src="Resources/Sounds/explosion3.mp3";
+explosion_large_vol2.volume = 0.8;
+let ship_explode = new Audio();
+ship_explode.src = "Resources/Sounds/explosion2.mp3";
+let coinGrab = new Audio();
+coinGrab.src="Resources/Sounds/cionGrab.mp3";
+coinGrab.volume=1;
+let highScore = new Audio();
+highScore.src = "Resources/Sounds/highscore.wav";
+
+let mouseOver = new Audio();
+mouseOver.src = "Resources/Sounds/button_hover.wav";
+let mouseDown = new Audio();
+mouseDown.src = "Resources/Sounds/button_press.wav";
+
+let sheildUp = new Audio();
+sheildUp.src = "Resources/Sounds/SheildUp.mp3";
+let PowerUp = new Audio();
+PowerUp.src = "Resources/Sounds/powerUp.mp3";
+let powerDown = new Audio();
+powerDown.src="Resources/Sounds/powerDown.mp3";
+
+function playBgMusic()
+{
+	bgMusic.play();
+	setTimeout(() => {
+		if(!isGameOver || !isPaused)
+		{
+			playBgMusic();
+		}
+	},139900);
+}
+
+window.addEventListener('load',() => {
+	playBgMusic();
+});
+
+function GAMEOVER()
+{
+	isGameOver = true;
+	bgMusic.pause();
+	cancelAnimationFrame(rock_spawn_animID);
+	cancelAnimationFrame(animID);
+	go_mainBody.innerHTML = "YOUR SCORE : "+gameScore+"<br> GOLD COIN COLLECTED : "+goldCoinCollected+"<br> SILVER COIN COLLECTED : "+silverCoinCollected+"<br> BRONZE COIN COLLECTED : "+bronzeCoinCollected;
+	gameOverUIPanel.style.top="50%";
+	if(_IS_LOGGED_IN=="true")
+	{
+		let _CURRENT_PLAYER = JSON.parse(localStorage.getItem("_CURRENT_PLAYER"));
+		if(_CURRENT_PLAYER._PLAYER_BEST_SCORE<gameScore)
+		{
+			highScore.play();
+			alert("You have beaten your all time best score! Congrats!");
+		}
+	}
+}
+
+class player
+{
+	constructor(x,y,color)
+	{
+		this.x=x;
+		this.y=y;
+		this.color=color;
+		this.spriteWidth = 152;
+		this.spriteHeight = 185;
+		this.radius = 80;
+	}
+
+	draw()
+	{
+		/*c.beginPath();
+		c.arc(this.x,this.y,55,Math.PI*2,false);
+		c.fillStyle = this.color;
+		c.fill();
+		c.strokeStyle = "gold";
+		c.stroke();
+		c.closePath();*/
+
+		c.drawImage(ship,this.x-this.radius,this.y-this.radius,this.radius*2,this.radius*2);
+	}
+
+	update()
+	{
+		this.draw();
+		if(mouse.x-50>=0 && mouse.x+50<=canvas.width)
+		{
+			this.x=mouse.x;
+		}
+	}
+}
+
+let planet;
+//gameObj = new rock({x: 500, y:100},{x: -10, y:3},"green",20);
+gamePlayer = new player(canvas.width/2,canvas.height-45,"red");
+
+//All Functions And Events Are Here..................................................................
+function spawnRocks()
+{
+	rock_spawn_animID = setInterval(() => {
+
+		let position,velocity,color,radius;
+		var p = Math.random();
+		radius = (Math.random()*45 + 25)/1.2;
+
+		if(p>=0 && p<=0.5)
+		{
+			position = {
+				x: Math.random()*canvas.width - radius*2,
+				y: Math.random()*canvas.height/10
+			}
+		}
+		else
+		{
+			position = {
+				x: radius*2 + Math.random()*canvas.width,
+				y: Math.random()*canvas.height/10
+			}
+		}
+		
+		if(p>=0 && p<=0.5)
+		{
+			velocity = {
+				x: (Math.random()*-0.5 + radius/8),
+				y: (Math.random()*-0.5 + radius/8)
+			}
+		}
+		else if(p>0.5)
+		{
+			velocity = {
+				x: (Math.random()*0.5 + radius/8),
+				y: (Math.random()*-0.5 + radius/8)
+			}
+		}
+
+		/*let colorArray = ["green","yellow","brown","pink","lightblue","blue"];
+		color = colorArray[parseInt(Math.random()*colorArray.length)];*/
+		color = "yellow";
+
+		if(!isPaused)
+		{
+			rocksArray.push(new rock(position,velocity,color,radius));
+		}
+	},5000);
+}
+
+function fireBullet()
+{
+	let position,radius,velocity;
+
+	position = {
+		x: gamePlayer.x+10,
+		y: gamePlayer.y-40
+	}
+
+	radius = 5;
+
+	velocity = {
+		x: 0,
+		y: 5
+	}
+
+	bulletsArray.push(new bullet(position,radius,velocity));
+}
+
+function spawnStars()
+{
+	for(let a=0;a<300;a++)
+	{
+		let x,y,radius,speed;
+		x=Math.random()*canvas.width;
+		y=Math.random()*canvas.height;
+		radius=Math.random()*3 + 2;
+		speed = Math.random()*1.5 + 0.2;
+
+		starsArray.push(new bgStart(x,y,radius,speed));
+	}
+}
+
+function spawnShip()
+{
+	//ship_animID = setInterval(() => {
+
+		let spawnPosition,basePosition,angle,baseAngle;
+		spawnPosition = {
+			x:Math.floor(Math.random()*canvas.width),
+			y:-100
+		}
+		basePosition = {
+			x:Math.floor(Math.random()*canvas.width-200) + 50,
+			y:Math.floor(Math.random()*canvas.height/3.2)
+		}
+		angle=Math.random()*360;
+		baseAngle=Math.atan2(basePosition.y-spawnPosition.y,basePosition.x-spawnPosition.x);
+
+		alienShipArray.push(new alienShip(spawnPosition,basePosition,angle,baseAngle));
+		//console.log(alienShipArray);
+
+	//},10000);
+}
+
+let isCreated = false;
+
+function MainLoop()
+{
+	animID = requestAnimationFrame(MainLoop);
+	if(!isPaused)
+	{
+		//-->First Layer --> Black Background... --> Bottom Layer.................................................................
+		c.fillStyle = 'rgba(0, 0, 0, 0.9)';
+		c.clearRect(0,0,canvas.width,canvas.height);
+		c.fillRect(0,0,canvas.width,canvas.height);
+		/*console.log("STAR ARRAY = "+starsArray.length);
+		console.log("powerUpsArray = "+powerUpsArray.length);
+		console.log("powerUpsEffectArray = "+powerUpsEffectArray.length);
+		console.log("alienMissleArray = "+alienMissleArray.length);
+		console.log("alienShipArray = "+alienShipArray.length);
+		console.log("rocksArray = "+rocksArray.length);
+		console.log("bulletsArray = "+bulletsArray.length);
+		console.log("particlesArray = "+particlesArray.length);
+		console.log("sparkelEffectArray = "+sparkelEffectArray.length);
+		console.log("explosionArray = "+explosionArray.length);
+		console.log("flyingCoinsArray = "+flyingCoinsArray.length);
+		console.log("animatedTxtArray = "+animatedTxtArray.length);
+		console.log("comboArray = "+comboArray.length);
+		console.log("isMorePower = "+isMorePower);
+		console.log("isExtraPoints = "+isExtraPoints);
+		console.log("isSheildActive = "+isSheildActive);*/
+
+		//-->Second Layer --> Background With Small With Circles Like Stars Moving Effect...
+		starsArray.forEach((star,index) => {
+			star.update();
+		});
+
+		//-->Third Layer --> Background Planets......
+		if(isCreated)
+		{
+			planet.update();
+		}
+
+		powerUpsEffectArray.forEach((effect,index)=>{
+			if(effect.type=="sheild")
+			{
+				if(effect.healthBarWidth>0)
+				{
+					effect.update();
+				}
+				else
+				{
+					powerUpsEffectArray.splice(index,1);
+					isSheildActive=false;
+					powerDown.play();
+				}
+			}
+			else if(effect.type=="power")
+			{
+				if(effect.healthBarWidth>0)
+				{
+					effect.update();
+				}
+				else
+				{
+					powerUpsEffectArray.splice(index,1);
+					isMorePower=false;
+					powerDown.play();
+				}
+			}
+			else
+			{
+				if(effect.healthBarWidth>0)
+				{
+					effect.update();
+				}
+				else
+				{
+					powerUpsEffectArray.splice(index,1);
+					isExtraPoints=false;
+					powerDown.play();
+				}
+			}
+		});
+		//-->Fourth Layer --> Player's Layer --> Mid Layer.....................................................................
+		gamePlayer.update();
+
+		flyingCoinsArray.forEach((coin,index) => {
+			let dist_between = Math.hypot(coin.x-gamePlayer.x,coin.y-gamePlayer.y);
+			if(coin.y-coin.radius>=canvas.height+50)
+			{
+				setTimeout(() => {
+					flyingCoinsArray.splice(index,1);
+				},0);
+			}
+			else if(dist_between<coin.radius+gamePlayer.radius)
+			{
+				coinGrab.play();
+				setTimeout(() => {
+					flyingCoinsArray.splice(index,1);
+				},0);
+				if(coin.coinName=="GOLD")
+				{
+					goldCoinCollected++;
+				}
+				else if(coin.coinName=="SILVER")
+				{
+					silverCoinCollected++;
+				}
+				else
+				{
+					bronzeCoinCollected++;
+				}
+			}
+			else
+			{
+				coin.update();
+			}
+		});
+
+		//-->Fifth Layer --> Explosion Effect Layer...
+		explosionArray.forEach((effect,index) => {
+			if(effect.frame==8)
+			{
+				setTimeout(()=>{
+					explosionArray.splice(index,1);
+				},0);
+			}
+			else
+			{
+				effect.update();
+			}
+		});
+
+		//-->Sixth Layer --> Particles Layer When Astroid Is Destroyed OR Partially Break...
+		particlesArray.forEach((Particles,index) => {
+			if(Particles.alpha<=0)
+			{
+				particlesArray.splice(index,1);
+			}
+			else
+			{
+				Particles.update();
+			}
+		});
+
+		//-->Seventh Layer --> Alien's Missle's Layer...
+		alienMissleArray.forEach((missle,index) => {
+			let dist = Math.hypot(missle.x-gamePlayer.x,missle.y-gamePlayer.y);
+			if(missle.y>=canvas.height-missle.radius+10)
+			{
+				setTimeout(()=>{
+					alienMissleArray.splice(index,1);
+				},0);
+			}
+			else if(dist<missle.radius+gamePlayer.radius && isSheildActive==false)
+			{
+				explosionArray.push(new explosionEffect(gamePlayer.x-65,gamePlayer.y-65));
+				setTimeout(()=>{
+					alienMissleArray.splice(index,1);
+				},0);
+				setTimeout(()=>{
+					GAMEOVER();
+				},400);
+				explosion_large_vol2.play();
+			}
+			else if(dist<missle.radius+110 && isSheildActive==true)
+			{
+				explosionArray.push(new explosionEffect(gamePlayer.x-65,gamePlayer.y-65));
+				setTimeout(()=>{
+					alienMissleArray.splice(index,1);
+				},0);	
+				explosion_large_vol2.play();
+			}
+			else
+			{
+				missle.update();
+			}
+		});
+
+		//-->Eighth Layer -->Astroid's Layer...
+		rocksArray.forEach((rock,index) => {
+
+			let dist = Math.hypot(gamePlayer.x-rock.position.x,gamePlayer.y-rock.position.y);
+			if(dist<gamePlayer.radius+rock.radius && isSheildActive==false)
+			{
+				GAMEOVER();
+			}
+			else if(dist<100+rock.radius && isSheildActive==true)
+			{
+				for(let i=0;i<rock.radius * 2;i++)
+				{
+					particlesArray.push(new Particles(rock.position.x,rock.position.y,(Math.random()+0.5)*2,rock.color,{
+						x:(Math.random() -0.5 )*(Math.random()*8),
+						y:(Math.random() -0.5 )*(Math.random()*8)
+					}));
+				}
+				setTimeout(() => {
+					rocksArray.splice(index,1);
+				},0);
+				explosion_large_vol2.play();
+			}
+			else if(rock.position.y-rock.radius>=canvas.height+200)
+			{
+				if(comboArray.length>=1)
+				{
+					comboArray = [];
+				}
+				setTimeout(() => {
+					rocksArray.splice(index,1);
+				},0);
+			}
+			else
+			{
+				rock.update();
+			}
+
+			bulletsArray.forEach((bullet,index_bullet) => {
+				let distance = Math.hypot(rock.position.x-bullet.position.x,rock.position.y-bullet.position.y);
+
+				if(distance < rock.radius+bullet.radius)
+				{
+
+					for(let i=0;i<rock.radius * 2;i++)
+					{
+						particlesArray.push(new Particles(rock.position.x,rock.position.y,(Math.random()+0.5)*2,rock.color,{
+							x:(Math.random() -0.5 )*(Math.random()*8),
+							y:(Math.random() -0.5 )*(Math.random()*8)
+						}));
+					}
+
+					if(rock.radius - 8 > 10 && isMorePower==false)
+					{
+						/*gsap.to(rock,{
+							radius : rock.radius - 10
+						});	*/
+						rock.radius -= 8;
+						if(isExtraPoints)
+						{
+							gameScore += Math.floor(Math.random()*30) + extraPoints;
+						}
+						else
+						{
+							gameScore += Math.floor(Math.random()*30);
+						}
+						if(Math.random()<=0.5)
+						{
+							explosion_mini.play();
+						}
+					}
+					else if(rock.radius - 10 > (8+power) && isMorePower)
+					{
+						rock.radius -= (8+power);
+						if(isExtraPoints)
+						{
+							gameScore += Math.floor(Math.random()*30) + extraPoints;
+						}
+						else
+						{
+							gameScore += Math.floor(Math.random()*30);
+						}
+						if(Math.random()<=0.5)
+						{
+							explosion_mini.play();
+						}
+					}
+					else
+					{
+						comboArray.push(comboArray.length*100 + 50);
+						if(isExtraPoints)	
+						{
+							gameScore += comboArray[comboArray.length-1] + extraPoints;
+						}
+						else
+						{
+							gameScore += comboArray[comboArray.length-1];
+						}
+						if(comboArray.length%2==0)
+						{
+							animatedTxtArray.push(new slowly_disappearing_txt(comboArray[comboArray.length-1],rock.position.x,rock.position.y,100,"blue","Space Age",0.01));
+						}
+						
+						setTimeout(() => {
+							rocksArray.splice(index,1);
+						},0);
+						if(Math.random()<=0.5)
+						{
+							explosion_large.play();
+						}
+						else
+						{
+							explosion_large_vol2.play();
+						}
+						if(Math.random()<=0.30)
+						{
+							flyingCoinsArray.push(new flyingCoins(rock.position.x,rock.position.y));
+						}
+					}
+					setTimeout(() => {
+						bulletsArray.splice(index_bullet,1);
+					},0);
+					rock.frameX++;
+					sparkelEffectArray.push(new sparkelEffect(rock.position.x,rock.position.y,Math.random()*10 + 5));
+				}
+
+			});
+		});
+
+		//-->Ninth Layer --> Player's Bullet Layer...
+		bulletsArray.forEach((bullet,index) => {
+
+			if(bullet.position.y <= -100)
+			{
+				setTimeout(() => {
+					bulletsArray.splice(index,1);
+				},0);
+			}
+			else
+			{
+				bullet.update();
+			}
+
+		});
+
+		//-->Tenth Layer -->Sparkel Effect's Layer...
+		sparkelEffectArray.forEach((effect,index) => {
+			if(effect.radius<100)
+			{
+				effect.update();
+			}
+			else
+			{
+				sparkelEffectArray.splice(index,1);
+			}
+		});
+
+		//-->Eleventh Layer --> Alien's Ship Layer...
+		alienShipArray.forEach((ship,index) => {
+			if(ship.spawnPosition.x<-50 || ship.spawnPosition.x>canvas.width+50)
+			{
+				setTimeout(() => {
+					alienShipArray.splice(index,1);
+				},0);
+			}
+			else
+			{
+				ship.update();
+			}
+
+			bulletsArray.forEach((bullet,b_index) => {
+				let distance = Math.hypot(ship.spawnPosition.x-bullet.position.x,ship.spawnPosition.y-bullet.position.y);
+
+				if(distance<70+5)
+				{
+					if(ship.distructable)
+					{
+						if(ship.healthBarWidth>10)
+						{
+							if(isMorePower)
+							{
+								ship.healthBarWidth-=(7+power);
+							}
+							else
+							{
+								ship.healthBarWidth-=7;
+							}
+						}
+						else
+						{
+							explosionArray.push(new explosionEffect(ship.spawnPosition.x-140,ship.spawnPosition.y-110));
+							flyingCoinsArray.push(new flyingCoins(ship.spawnPosition.x,ship.spawnPosition.y));
+							setTimeout(() => {
+								alienShipArray.splice(index,1);
+							},0);
+							let val = Math.floor(Math.random()*100);
+							if(isExtraPoints)
+							{
+								gameScore += val + extraPoints;
+							}
+							else
+							{
+								gameScore += val;
+							}
+							animatedTxtArray.push(new slowly_disappearing_txt(val,ship.spawnPosition.x,ship.spawnPosition.y,100,"blue","Space Age",0.01));
+							if(Math.random()<=0.6)
+							{
+								ship_explode.play();
+							}
+							else
+							{
+								explosion_large_vol2.play();
+							}
+						}
+					}
+
+					setTimeout(() => {
+						bulletsArray.splice(b_index,1);
+					},0);
+				}
+
+			});
+		});
+		powerUpsArray.forEach((powerUp,index)=>{
+			let dist_powerUp = Math.hypot(powerUp.x-gamePlayer.x,powerUp.y-gamePlayer.y);
+			if(powerUp.y>=canvas.height+70)
+			{
+				setTimeout(()=>{
+					powerUpsArray.splice(index,1);
+				},0);
+			}
+			else if(dist_powerUp<powerUp.radius+58)
+			{
+				setTimeout(()=>{
+					powerUpsArray.splice(index,1);
+				},0);
+				if(powerUp.type=="sheild")	
+				{
+					powerUpsEffectArray.push(new powerUpEffect(gamePlayer.x,gamePlayer.y,200,powerUp.p,powerUp.type));
+					isSheildActive = true;
+					sheildUp.play();
+				}
+				else if(powerUp.type=="power")
+				{
+					powerUpsEffectArray.push(new powerUpEffect(gamePlayer.x,gamePlayer.y,200,powerUp.p,powerUp.type));
+					isMorePower=true;
+					PowerUp.play();
+				}
+				else
+				{
+					powerUpsEffectArray.push(new powerUpEffect(gamePlayer.x,gamePlayer.y,200,powerUp.p,powerUp.type));
+					isExtraPoints=true;
+					PowerUp.play();	
+				}
+			}
+			else
+			{
+				powerUp.update();
+			}
+		});
+		gameFrame++;
+		if(gameFrame%1000==0 && powerUpsEffectArray.length==0)
+		{
+			powerUpsArray.push(new powerUps(Math.random()*canvas.width/2,-50,50));
+		}
+
+		if(gameFrame%13==0)
+		{
+			angle++;
+			reverseAngle--;
+		}
+
+		if(gameFrame%900==0)
+		{
+			spawnShip();
+		}
+
+		if(gameFrame==500)
+		{
+			planet = new bgPlanets(Math.random()*canvas.width,-900);
+			isCreated=true;
+		}
+
+		//-->Twelvth Layer --> Text Layer..... --> Top Layer
+		if(comboArray.length>1)
+		{
+			c.beginPath();
+			c.fillStyle = "red";
+			c.font = "100px Space Age";
+			c.fillText(comboArray.length+"X combo",canvas.width/2-350,200);
+			c.closePath();
+		}
+
+		animatedTxtArray.forEach((txt,index) => {
+			if(txt.alpha<=0)
+			{
+				//setTimeout(()=>{
+					animatedTxtArray.splice(index,1);
+				//},0);	
+			}
+			else
+			{
+				txt.update();
+			}
+		});
+		scoreUIPanel.innerHTML = "SCORE : "+gameScore;
+	}
+	else
+	{
+		console.log("GAME IS PAUSED!");
+	}
+	c.beginPath();
+	c.drawImage(goldCoin_noUpDown,0,254,276,254,50,canvas.height-100,276/2.5,254/2.5);
+	c.fillStyle = "red";
+	c.font = "35px Space Age";
+	c.fillText(goldCoinCollected,140,canvas.height-30);
+	c.drawImage(silverCoin_icon,200,canvas.height-85,1068/12,652/12);
+	c.fillText(silverCoinCollected,280,canvas.height-30);
+	c.drawImage(bronzeCoin_icon,350,canvas.height-85,1068/12,652/12);
+	c.fillText(bronzeCoinCollected,430,canvas.height-30);
+	c.closePath();
+}
+let ready=false;
+
+window.addEventListener('keydown',(e) => {
+	//console.log(e.keyCode);27
+	if(e.keyCode==27 && !isGameOver)
+	{
+		if(!isPaused)
+		{
+			isPaused=true;
+			bgMusic.pause();
+			pauseUIPanel.style.display="block";
+			pauseUIPanel.style.top="50%";
+			ESC_notice.innerHTML = "PRESS 'Esc' Key To Resume";
+			explosion_mini.play();
+		}
+		else
+		{
+			isPaused=false;
+			bgMusic.play();
+			pauseUIPanel.style.display="none";
+			pauseUIPanel.style.top="-100%";
+			ESC_notice.innerHTML = "PRESS 'Esc' Key To Pause";
+		}
+	}
+});
+
+ip_btn_play.addEventListener('click',()=>{
+	info_panel.style.top="-100%";
+	MainLoop();
+	spawnStars();
+	spawnRocks();
+	ready=true;
+	mouseDown.play();
+});
+
+window.addEventListener('mousemove',(e) => {
+	if(!isGameOver && !isPaused && ready)
+	{
+		laser.play();
+	}
+	mouse.x = e.clientX;
+	mouse.y = e.clientY;
+	if(gameFrame%8==0 && ready && !isGameOver && !isPaused)
+	{
+		fireBullet();
+	}
+});
+
+pause_resumeBtn.addEventListener('click',() => {
+	isPaused=false;
+	bgMusic.play();
+	pauseUIPanel.style.display="none";
+	pauseUIPanel.style.top="-100%";
+	ESC_notice.innerHTML = "PRESS 'Esc' Key To Pause";
+	mouseDown.play();
+});
+
+</script>
+</html>

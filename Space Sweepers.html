@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="Assest/Resources/Styles/UIPanels_Style.css">
+	<link rel="stylesheet" type="text/css" href="Assest/Resources/Styles/UIElements_Style.css">
+	<style type="text/css">
+		*
+		{
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		::-webkit-scrollbar
+		{
+			width: 0px;
+			opacity: 0;
+		}
+		.MainMenu
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			width: 80%;
+			height: 80%;
+			font-family: Space Age;
+		}
+		.MainMenuBtn
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			color: red;
+			border: 3px solid red;
+			border-radius: 100px;
+			padding: 6px;
+			width: 40%;
+			height: auto;
+			justify-content: center;
+			text-align: center;
+			align-items: center;
+			font-size: 2rem;
+			transition: 0.5s;
+			background: transparent;
+			user-select: none;
+		}
+		.MainMenuBtn:hover
+		{
+			width: 45%;
+			background: lightgreen;
+			border: 3px solid green;
+			color: green;
+			box-shadow: 0 0 20px white, 0 0 30px white, 0 0 50px white, 0 0 30px white, 0 0 20px white;
+			cursor: pointer;
+			transition: 0.5s;
+		}
+		#playBtn
+		{
+			top: 25%;
+		}
+		#loadBtn
+		{
+			top: 40%;
+		}
+		#scoreBtn
+		{
+			top: 55%;
+		}
+		#shopBtn
+		{
+			top: 70%;
+		}
+		#howBtn
+		{
+			top: 85%;
+		}
+		#loadPanel
+		{
+			top: -100%;
+		}
+		#loandPanel_body
+		{
+			width: 100%;
+			justify-content: center;
+			text-align: center;
+			align-items: center;
+			top: 40%;
+			font-size: 1.5rem;
+		}
+		#loanPanel_heading
+		{
+			font-family: Space Age;
+		}
+		#loadPanel_inputBox
+		{
+			top: 67%;
+			width: 45%;
+		}
+		#loadPanel_inputBox:focus
+		{
+			transition: 0.5s;
+			width: 55%;
+		}
+		#loadPanel_loadBtn
+		{
+			top: 80%;
+			width: 50%;
+		}
+		#loadPanel_newBtn
+		{
+			top: 93%;
+			width: 50%;
+		}
+		#name_panel
+		{
+			left: 20%;
+		}
+		#mainTable
+		{
+			position: absolute;
+			top: 25%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			width: 95%;
+			height: auto;
+			transition: 0.5s;
+		}
+		#mainTable tr td
+		{
+			height: 25px;
+			padding: 5px;
+			transition: 0.5s;
+		}
+		#mainTable tr:hover td
+		{
+			background: lightgreen;
+			transition: 0.5s;
+		}
+		#mainTable tr td:hover
+		{
+			background: transparent;
+			transition: 0.5s;
+		}
+		tr
+		{
+			font-size: 1.5rem;
+			color: black;
+		}
+		#scorePanel
+		{
+			top: -100%;
+		}
+		#scorePanel_closeBtn
+		{
+			top: 90%;
+		}
+		#h1
+		{
+			font-size: 3rem;
+			width: 100%;
+			text-align: center;
+		}
+		#shopPanel_shopBtn
+		{
+			top: 13%;
+			left: 30%;
+			width: 20%;
+		}
+		#shopPanel_shopBtn:hover
+		{
+			width: 30%;
+		}
+		#shopPanel_upgradeBtn
+		{
+			top: 13%;
+			left: 70%;
+			width: 20%;
+		}
+		#shopPanel_upgradeBtn:hover
+		{
+			width: 30%;
+		}
+		#shopPanel_backBtn
+		{
+			top: 98%;
+			left: 50%;
+			width: 20%;
+		}
+		#shopPanel_backBtn:hover
+		{
+			width: 30%;
+		}
+		#shipShopPanel
+		{
+			background: black;
+			top: 55%;
+			width: 90%;
+		}
+		#upgradePanel
+		{
+			background: black;
+			top: 55%;
+			width: 90%;
+			top: -100%;
+		}
+		#innerTbl
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			width: 95%;
+			height: 95%;
+			user-select: none;
+		}
+		#innerTbl1
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			width: 95%;
+			height: 95%;
+			user-select: none;
+		}
+		#innerTbl tr td
+		{
+			color: lightgreen;
+			user-select: none;
+			font-size: 1.2rem;
+		}
+		#innerTbl1 tr td
+		{
+			color: lightgreen;
+			user-select: none;
+			font-size: 1.2rem;
+		}
+		#innerTbl tr td img
+		{
+			width: 70%;
+			height: 70%;
+		}
+		#innerTbl1 tr td img
+		{
+			width: 25%;
+			height: 25%;
+		}
+		.innerTbl_button
+		{
+			border: 2px solid lightgreen;
+			padding: 5px;
+			border-radius: 100px;
+			transition: 0.5s;
+		}
+		.innerTbl_button:hover
+		{
+			cursor: pointer;
+			background: lightgreen;
+			border: 2px solid green;
+			color: green;
+			transition: 0.5s;
+		}
+		#innerTbl .nameTD
+		{
+			color: red;
+			font-size: 1.3rem;
+		}
+		#shopPanel,#shipShopPanel
+		{
+			top: -100%;
+		}
+		#skinBuyPanel,#upgradePerksPanel
+		{
+			top: -100%;
+		}
+		#mainHead,#mainHead1 
+		{
+			width: 100%;
+			font-size: 1.8rem;
+			text-align: center;
+			justify-content: center;
+			top: 5%;
+		}
+		#buyInfo,#upgradeInfo
+		{
+			position: absolute;
+			top: 40%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			width: 100%;
+			justify-content: center;
+			text-align: center;
+		}
+		#buyBtn,#upgradeBtn
+		{
+			top: 70%;
+		}
+		#cancelBtn,#btnCancel
+		{
+			top: 85%;
+		}
+		#howToPlayPanel
+		{
+			position: absolute;
+			top: -100%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			transition: 0.5s;
+			width: 90%;
+			height: 90%;
+			background: lightblue;
+		}
+		#howToPlayPanel h1
+		{
+			font-family: Space Age;
+			position: absolute;
+			top: 5%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			justify-content: center;
+			text-align: center;
+			font-size: 4rem;
+		}
+		#howToPlayPanel p
+		{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			font-family: sectar;
+			font-size: 1.2rem;
+			width: 100%;
+			justify-content: center;
+			text-align: center;
+		}
+		#howToPlayPanel span
+		{
+			position: absolute;
+			top: 92%;
+			left: 50%;
+			transform: translate(-50%,-50%);
+			font-family: sectar;
+			font-size: 1.2rem;
+			transition: 0.5s;
+			background: transparent;
+			color: black;
+			border: 2px solid black;
+			width: 35%;
+			padding: 15px;
+			border-radius: 100px;
+			text-align: center;
+		}
+		#howToPlayPanel span:hover
+		{
+			cursor: pointer;
+			width: 50%;
+			transition: 0.5s;
+			color: red;
+			border: 2px solid red;
+			background: black;
+		}
+	</style>
+</head>
+<body>
+<!--   Main Menu Layer   -->
+<div class="MainMenu">
+	<span class="MainMenuBtn" id="playBtn">PLAY GAME</span>
+	<span class="MainMenuBtn" id="loadBtn">LOAD PROFILE</span>
+	<span class="MainMenuBtn" id="scoreBtn">HIGHSCORE</span>
+	<span class="MainMenuBtn" id="shopBtn">SHOP & PERKS</span>
+	<span class="MainMenuBtn" id="howBtn">HOW TO PLAY</span>
+</div>
+
+<div class="UIPanel_Regular" id="name_panel"></div>
+
+<div class="UIPanel_Medium" id="loadPanel">
+	<h1 class="TextStyle_mainHeading" id="loanPanel_heading">LOAD YOUR PROFILE HERE</h1>
+	<br>
+	<br>
+	<p class="TextStyle_mainBody" id="loandPanel_body">
+		If you have played this game once, We suggest you to load your profile using your profile name!
+		<br>
+		If You are new player, No worry ! You can still play game. Just click on 'CONTINUE AS NEW PLAYER'.
+		<br>
+		You can check your score & current position in 'HIGHSCORE' tab. If you have saved your profile, If not then , go and play the game and check your skills with others and lot more!
+	</p>
+	<br>
+	<input type="" name="" class="ElementStyle_inputBox" id="loadPanel_inputBox" placeholder="ENTER YOUR PROFILE NAME">
+	<br>
+	<span class="ElementStyle_button" id="loadPanel_loadBtn">LOAD PROFILE</span>
+	<span class="ElementStyle_button" id="loadPanel_newBtn">CONTINUE AS NEW PLAYER</span>
+</div>
+
+<div class="UIPanel_Medium" id="scorePanel">
+	<h1 class="TextStyle_mainHeading">WALL OF FAME</h1>
+	<table id="mainTable">
+		<tbody id="tableBody">
+			<tr id="mainTR">
+				<td>RANK</td>
+				<td>NAME</td>
+				<td>BEST SCORE</td>
+				<td>GOLD COIN HAVE</td>
+				<td>SILVER COIN HAVE</td>
+				<td>BRONZE COIN HAVE</td>
+			</tr>
+		</tbody>
+	</table>
+	<span class="ElementStyle_button" id="scorePanel_closeBtn">CLOSE</span>
+</div>
+
+<div class="UIPanel_Large" id="shopPanel">
+	<h1 class="TextStyle_mainHeading" id="h1">SHOP & PERKS ARE HERE</h1>
+	<span class="ElementStyle_button" id="shopPanel_shopBtn">SHIP SHOP</span>
+	<span class="ElementStyle_button" id="shopPanel_upgradeBtn">UPGRADES</span>
+	<div class="UIPanel_Medium" id="shipShopPanel">
+		<table id="innerTbl">
+			<tbody>
+				<tr>
+					<td><img src="Assest/Resources/Spritesheets/spaceship/defaultShip.png"></td>
+					<td><img src="Assest/Resources/Spritesheets/spaceship/defaultShip2.png"></td>
+					<td><img src="Assest/Resources/Spritesheets/spaceship/ship2.png"></td>
+					<td><img src="Assest/Resources/Spritesheets/spaceship/ship3.png"></td>
+					<td><img src="Assest/Resources/Spritesheets/spaceship/ship4.png"></td>
+					<td><img src="Assest/Resources/Spritesheets/spaceship/ship5.png"></td>
+				</tr>
+				<tr>
+					<td class="nameTD">THE RED KING</td>
+					<td class="nameTD">THE GREEN LANTERN</td>
+					<td class="nameTD">THE BLUE ICONIC</td>
+					<td class="nameTD">THE DESTROYER</td>
+					<td class="nameTD">THE LUMBERJACK</td>
+					<td class="nameTD">THE ELITE</td>
+				</tr>
+				<tr>
+					<td><span>DEFAULT SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="buySkin(10,5,5,1)" id="btn1">BUY SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="buySkin(10,8,8,2)" id="btn2">BUY SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="buySkin(10,10,10,3)" id="btn3">BUY SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="buySkin(20,15,15,4)" id="btn4">BUY SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="buySkin(20,20,20,5)" id="btn5">BUY SKIN</span></td>
+				</tr>
+				<tr>
+					<td><span class="innerTbl_button" onclick="activateSkin(0)" id="activeBtn0">ACTIVATE SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="activateSkin(1)" style="display: none;" id="activeBtn1">ACTIVATE SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="activateSkin(2)" style="display: none;" id="activeBtn2">ACTIVATE SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="activateSkin(3)" style="display: none;" id="activeBtn3">ACTIVATE SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="activateSkin(4)" style="display: none;" id="activeBtn4">ACTIVATE SKIN</span></td>
+					<td><span class="innerTbl_button" onclick="activateSkin(5)" style="display: none;" id="activeBtn5">ACTIVATE SKIN</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="UIPanel_Medium" id="upgradePanel">
+		<table id="innerTbl1">
+			<tbody>
+				<tr>
+					<td><img src="Assest/Resources/Spritesheets/powerUps/power.png"></td>
+					<td><img src="Assest/Resources/Spritesheets/powerUps/sheild.png"></td>
+					<td><img src="Assest/Resources/Spritesheets/powerUps/xp.png"></td>
+				</tr>
+				<tr>
+					<td>EXTRA POWER</td>
+					<td>SHEILD PROTECTION</td>
+					<td>EXTRA POINTS</td>
+				</tr>
+				<tr>
+					<td>It will give your bullets some extra power, with the help of this you can destroy astroid and alien-ship very easy.</td>
+					<td>
+						It will protect your ship from astroids and alien-missles. And Also it will not break your combo streak.! So, Have some fun with it!
+					</td>
+					<td>
+						It will give you extra points whenever you will break a astroid OR destoy a alien-ship! You can upgrade to get more extra points!
+					</td>
+				</tr>
+				<tr>
+					<td id="powerInfo">POWER : 10</td>
+					<td id="sheildDuration">DURATION : 20</td>
+					<td id="pointsInfo">EXTRA POINTS : 30</td>
+				</tr>
+				<tr>
+					<td><span class="innerTbl_button" onclick="upgradePerks(0)">UPGRADE</span></td>
+					<td><span class="innerTbl_button" onclick="upgradePerks(1)">UPGRADE</span></td>
+					<td><span class="innerTbl_button" onclick="upgradePerks(2)">UPGRADE</span></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<span class="ElementStyle_button" id="shopPanel_backBtn">BACK</span>
+</div>
+
+<div class="UIPanel_Small" id="skinBuyPanel">
+	<h1 class="TextStyle_mainHeading" id="mainHead">Are you sure you want to buy?</h1>
+	<div id="buyInfo">
+		You will trade <mark> 10 </mark> Gold Coins <mark> 5 </mark> Silver Coins And <mark> 5 </mark> Bronze Coins For this ship.
+		Press Buy for buy this ship otherwise press Cancel.
+	</div>
+	<span class="ElementStyle_button" id="buyBtn" onclick="buy()">BUY</span>
+	<span class="ElementStyle_button" id="cancelBtn" onclick="cancel()">CANCEL</span>
+</div>
+
+<div class="UIPanel_Small" id="upgradePerksPanel">
+	<h1 class="TextStyle_mainHeading" id="mainHead1">Are you sure you want to upgrade?</h1>
+	<div id="upgradeInfo">
+		You will trade <mark> 10 </mark> Gold Coins <mark> 5 </mark> Silver Coins And <mark> 5 </mark> Bronze Coins For this upgrade. Your power will increase 5 points.
+		Press Upgrade for upgrade this perk or press Cancel.
+	</div>
+	<span class="ElementStyle_button" id="upgradeBtn" onclick="upgrade()">UPGRADE</span>
+	<span class="ElementStyle_button" id="btnCancel" onclick="btnCancel()">CANCEL</span>
+</div>
+
+<div id="howToPlayPanel">
+	<h1>HOW To PLAY</h1>
+	<p>It is very late discovery of existance of alien by scientist team, which is known as "SAPCE SWEEPERS".
+	<br><br><br> They have discovered that on the nearest sun from us which is "ALPHA CENTAURI", On that planet they have find the ALIENS EXISTANCE; But it was not the moment of proud because somehow they have found that aliens are pretending us their enemy! So, they have decided to take a fight!! Now, They are travelling in space to "ALPHA CENTAURI" to kill all enemy aliens before they do the same. 
+		<br>
+		<br>
+		<br>
+		Explore more and more in space and find some perks! Explore what they can do and upgrade them with resources....
+		<br>
+		<br>
+		<br>
+		But beware from astroids, because they are all over in space..Douge them and kill all enemy aliens for resources!
+	</p>
+	<span id="howToPlayPanel_closeBtn">CLOSE</span>
+</div>
+
+<canvas>): ...CANVAS IS NOT SUPPORTED IN YOUR BROWZER.. :(</canvas>
+
+</body>
+<script type="text/javascript" src="Assest/Resources/Scripts/forStars_class.js"></script>
+<script type="text/javascript" src="Assest/Resources/Scripts/forPlanets_class.js"></script>
+<script type="text/javascript">
+const canvas = document.querySelector('canvas');
+const c = canvas.getContext('2d');
+
+//window.addEventListener('load',()=>{
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+let starsArray = [];
+let planet = new bgPlanets(Math.random()*canvas.width,-900);
+let anim_ID;
+let isLoaded = false;
+let isPlayer = false;
+let hasToShow = false;
+let tradeObj = {
+	_GOLD_COIN : undefined,
+	_SILVER_COIN : undefined,
+	_BRONZE_COIN : undefined,
+	_SHIP_NO : undefined
+};
+let upgradeObj = {
+	_GOLD_COIN : 5,
+	_SILVER_COIN : 3,
+	_BRONZE_COIN : 3,
+	_UPGRADE : undefined
+};
+
+let planet1 = new Image();
+planet1.src="Assest/Resources/Spritesheets/planets/planet-1.png";
+let planet2 = new Image();
+planet2.src="Assest/Resources/Spritesheets/planets/planet-2.png";
+let planet3 = new Image();
+planet3.src="Assest/Resources/Spritesheets/planets/planet-3.png";
+let planet4 = new Image();
+planet4.src="Assest/Resources/Spritesheets/planets/planet-4.png";
+let planet5 = new Image();
+planet5.src="Assest/Resources/Spritesheets/planets/planet-5.png";
+let planet6 = new Image();
+planet6.src="Assest/Resources/Spritesheets/planets/planet-6.png";
+let planet7 = new Image();
+planet7.src="Assest/Resources/Spritesheets/planets/planet-7.png";
+let planet8 = new Image();
+planet8.src="Assest/Resources/Spritesheets/planets/planet-8.png";
+let planet9 = new Image();
+planet9.src="Assest/Resources/Spritesheets/planets/planet-9.png";
+let planet10 = new Image();
+planet10.src="Assest/Resources/Spritesheets/planets/planet-10.png";
+let planet11 = new Image();
+planet11.src="Assest/Resources/Spritesheets/planets/planet-11.png";
+let planet12 = new Image();
+planet12.src="Assest/Resources/Spritesheets/planets/planet-12.png";
+let planet13 = new Image();
+planet13.src="Assest/Resources/Spritesheets/planets/planet-13.png";
+let planet14 = new Image();
+planet14.src="Assest/Resources/Spritesheets/planets/planet-14.png";
+let planet15 = new Image();
+planet15.src="Assest/Resources/Spritesheets/planets/planet-15.png";
+let planet16 = new Image();
+planet16.src="Assest/Resources/Spritesheets/planets/planet-16.png";
+let planet17 = new Image();
+planet17.src="Assest/Resources/Spritesheets/planets/planet-17.png";
+let planet18 = new Image();
+planet18.src="Assest/Resources/Spritesheets/planets/planet-18.png";
+let planet19 = new Image();
+planet19.src="Assest/Resources/Spritesheets/planets/planet-19.png";
+let planet20 = new Image();
+planet20.src="Assest/Resources/Spritesheets/planets/planet-20.png";
+
+let bronzeCoin_icon = new Image();
+bronzeCoin_icon.src = "Assest/Resources/Spritesheets/flyingCoins/icons/bronze.png";
+let silverCoin_icon = new Image();
+silverCoin_icon.src = "Assest/Resources/Spritesheets/flyingCoins/icons/silver.png";
+let goldCoin_icon = new Image();
+goldCoin_icon.src = "Assest/Resources/Spritesheets/flyingCoins/icons/gold.png";
+
+let bgMusic = new Audio();
+bgMusic.src = "Assest/Resources/Sounds/music3.mp3";
+let bgMusic1 = new Audio();
+bgMusic1.src = "Assest/Resources/Sounds/music2.mp3";
+let bgMusic2 = new Audio();
+bgMusic2.src = "Assest/Resources/Sounds/music1.mp3";
+let bgMusic3 = new Audio();
+bgMusic3.src = "Assest/Resources/Sounds/GameStart1.mp3";
+bgMusic.volume = 0.4;
+bgMusic1.volume = 0.4;
+bgMusic2.volume = 0.4;
+bgMusic3.volume = 0.4;
+let upgradeSound = new Audio();
+upgradeSound.src = "Assest/Resources/Sounds/SettingsSaved.mp3";
+upgradeSound.volume=0.4;
+
+let mouseOver = new Audio();
+mouseOver.src = "Assest/Resources/Sounds/button_hover.wav";
+let mouseDown = new Audio();
+mouseDown.src = "Assest/Resources/Sounds/button_press.wav";
+
+function playBgMusic1()
+{
+	bgMusic1.play();
+	setTimeout(()=>{
+		bgMusic2.play();
+		setTimeout(()=>{
+			bgMusic3.play();
+			setTimeout(()=>{
+				playBgMusic();
+			},18500);
+		},79500);
+	},101500);
+}
+
+function playBgMusic()
+{
+	bgMusic.play();
+	setTimeout(()=>{
+		playBgMusic1();
+	},138000);
+}
+
+
+//All panels...
+let playBtn = document.getElementById('playBtn');
+let loadBtn = document.getElementById('loadBtn');
+let scoreBtn = document.getElementById('scoreBtn');
+let howBtn = document.getElementById('howBtn');
+let shopBtn = document.getElementById('shopBtn');
+
+let loadPanel = document.getElementById('loadPanel');
+let loadPanel_loadBtn = document.getElementById('loadPanel_loadBtn');
+let loadPanel_newBtn = document.getElementById('loadPanel_newBtn');
+let loadPanel_inputBox = document.getElementById('loadPanel_inputBox');
+
+let name_panel = document.getElementById('name_panel');
+
+let tableBody = document.getElementById('tableBody');
+
+let scorePanel = document.getElementById('scorePanel');
+let scorePanel_closeBtn = document.getElementById('scorePanel_closeBtn');
+
+let shopPanel = document.getElementById('shopPanel');
+let shopPanel_shopBtn = document.getElementById('shopPanel_shopBtn');
+let shopPanel_upgradeBtn = document.getElementById('shopPanel_upgradeBtn');
+let shipShopPanel = document.getElementById('shipShopPanel');
+let shopPanel_backBtn = document.getElementById('shopPanel_backBtn');
+let upgradePanel = document.getElementById('upgradePanel');
+
+let skinBuyPanel = document.getElementById('skinBuyPanel');
+let upgradePerksPanel = document.getElementById('upgradePerksPanel');
+
+let buyInfo = document.getElementById('buyInfo');
+let upgradeInfo = document.getElementById('upgradeInfo');
+
+let activeBtn0 = document.getElementById('activeBtn0');
+let activeBtn1 = document.getElementById('activeBtn1');
+let activeBtn2 = document.getElementById('activeBtn2');
+let activeBtn3 = document.getElementById('activeBtn3');
+let activeBtn4 = document.getElementById('activeBtn4');
+let activeBtn5 = document.getElementById('activeBtn5');
+
+let btn1 = document.getElementById('btn1');
+let btn2 = document.getElementById('btn2');
+let btn3 = document.getElementById('btn3');
+let btn4 = document.getElementById('btn4');
+let btn5 = document.getElementById('btn5');
+
+let powerInfo = document.getElementById('powerInfo');
+let sheildDuration = document.getElementById('sheildDuration');
+let pointsInfo = document.getElementById('pointsInfo');
+
+let howToPlayPanel = document.getElementById('howToPlayPanel');
+let howToPlayPanel_closeBtn = document.getElementById('howToPlayPanel_closeBtn');
+
+let _LOCAL_DATA = JSON.parse(localStorage.getItem("_SPACE_SWEEPERS_LOCAL_DATA"));
+let _RECENT_PLAYER = {};
+let _GAME_DATA = _LOCAL_DATA;
+let _IS_LOGGED_IN = localStorage.setItem("_IS_LOGGED_IN","false");
+let _CURRENT_PLAYER = localStorage.setItem("_CURRENT_PLAYER",undefined);
+
+function upgradeUpgradeShop()
+{
+	if(isLoaded)
+	{
+		if(isPlayer)
+		{
+			powerInfo.innerHTML = "POWER : "+_RECENT_PLAYER._POWERUPS_UPGRADE[1]._DURATION;
+			sheildDuration.innerHTML = "DURATION : "+_RECENT_PLAYER._POWERUPS_UPGRADE[0]._TYPE[0]._DURATION*1000 + " ms";
+			pointsInfo.innerHTML = "EXTRA POINTS : "+_RECENT_PLAYER._POWERUPS_UPGRADE[2]._EXTRA_POINTS;
+		}
+	}
+}
+
+function UpdateWallOfFame()
+{
+	let rank = 1;
+	for(let i=0;i<_GAME_DATA.length;i++)
+	{
+		for(let k=0;k<_GAME_DATA.length;k++)
+		{
+			if(_GAME_DATA[i]._PLAYER_BEST_SCORE>=_GAME_DATA[k]._PLAYER_BEST_SCORE)
+			{
+				let temp;
+				temp=_GAME_DATA[i];
+				_GAME_DATA[i]=_GAME_DATA[k];
+				_GAME_DATA[k]=temp;
+			}
+		}
+	}
+
+	for(let k=0;k<_GAME_DATA.length;k++)
+	{
+		tableBody.innerHTML += "<tr><td>"+rank+"</td><td>"+_GAME_DATA[k]._PLAYER_NAME+"</td><td>"+_GAME_DATA[k]._PLAYER_BEST_SCORE+"</td><td>"+_GAME_DATA[k]._GOLD_COIN_HAVE+"</td><td>"+_GAME_DATA[k]._SILVER_COIN_HAVE+"</td><td>"+_GAME_DATA[k]._BRONZE_COIN_HAVE+"</td></tr>";
+		rank++;
+	}
+}
+
+function UpdateShipShop()
+{
+	for(let i=0;i<_RECENT_PLAYER._SHIP_COLLECTION.length;i++)
+	{
+		if(_RECENT_PLAYER._SHIP_COLLECTION[i]=="ship0")
+		{
+			activeBtn1.style.display = "block";
+			btn1.style.display="none";
+		}
+		else if(_RECENT_PLAYER._SHIP_COLLECTION[i]=="ship1")
+		{
+			activeBtn2.style.display = "block";
+			btn2.style.display="none";
+		}
+		else if(_RECENT_PLAYER._SHIP_COLLECTION[i]=="ship2")
+		{
+			activeBtn3.style.display = "block";
+			btn3.style.display="none";
+		}
+		else if(_RECENT_PLAYER._SHIP_COLLECTION[i]=="ship3")
+		{
+			activeBtn4.style.display = "block";
+			btn4.style.display="none";		
+		}
+		else if(_RECENT_PLAYER._SHIP_COLLECTION[i]=="ship4")
+		{
+			activeBtn5.style.display = "block";
+			btn5.style.display="none";		
+		}
+	}
+}
+
+function UpdateLocalStorage()
+{
+	for(let i=0;i<_GAME_DATA.length;i++)
+	{
+		if(_GAME_DATA[i]._PLAYER_NAME == _RECENT_PLAYER._PLAYER_NAME)
+		{
+			_GAME_DATA.splice(i,1);
+			_GAME_DATA.push(_RECENT_PLAYER);
+			_LOCAL_DATA = localStorage.setItem("_SPACE_SWEEPERS_LOCAL_DATA",JSON.stringify(_GAME_DATA));
+			UpdateWallOfFame();
+			UpdateShipShop();
+			upgradeUpgradeShop();
+			skinBuyPanel.style.top = "-100%";
+		}
+	}
+	_CURRENT_PLAYER = localStorage.setItem("_CURRENT_PLAYER",JSON.stringify(_RECENT_PLAYER));
+}
+
+//Functions....
+function fillNamePanel(name,isPlaye)
+{
+	if(isPlaye)	
+	{
+		name_panel.innerHTML = "PLAYER NAME : "+name;
+		isPlayer = true;
+		isLoaded = true;
+		hasToShow = true;
+		UpdateShipShop();
+		_IS_LOGGED_IN = localStorage.setItem("_IS_LOGGED_IN","true");
+		_CURRENT_PLAYER = localStorage.setItem("_CURRENT_PLAYER",JSON.stringify(_RECENT_PLAYER));
+		upgradeUpgradeShop();
+	}
+	else
+	{
+		name_panel.innerHTML = name;
+		isLoaded = true;
+		isPlayer = false;
+		hasToShow=false;
+	}
+}
+
+function UpdateCurrency()
+{
+	c.beginPath();
+	c.drawImage(goldCoin_icon,canvas.width-700,15,1064/10,100);
+	c.fillStyle = "red";
+	c.font = "45px Space Age";
+	c.fillText(_RECENT_PLAYER._GOLD_COIN_HAVE,canvas.width-600,80);
+	c.closePath();
+
+	c.beginPath();
+	c.drawImage(silverCoin_icon,canvas.width-500,20,1064/10,654/9.4);
+	//c.fillStyle = "red";
+	//c.font = "45px Space Age";
+	c.fillText(_RECENT_PLAYER._SILVER_COIN_HAVE,canvas.width-400,80);
+	c.closePath();
+
+	c.beginPath();
+	c.drawImage(bronzeCoin_icon,canvas.width-300,20,1064/10,654/9.4);
+	//c.fillStyle = "red";
+	//c.font = "45px Space Age";
+	c.fillText(_RECENT_PLAYER._BRONZE_COIN_HAVE,canvas.width-200,80);
+	c.closePath();
+}
+
+function checkIsExist_IN_LOCAL_GAME_DATA(name)
+{
+	var isExist = false;
+	var INDEX = 0;
+	for(let i=0;i<_LOCAL_DATA.length;i++)
+	{
+		if(_LOCAL_DATA[i]._PLAYER_NAME == name)
+		{
+			isExist=true;
+			INDEX = i;
+		}
+	}
+
+	if(isExist)
+	{
+		_RECENT_PLAYER = _LOCAL_DATA[INDEX];
+		loadPanel.style.top = "-100%";
+		fillNamePanel(name,true);
+		alert("Your profile loaded successfully!");
+		loadPanel_inputBox.value = "";
+	}
+	else
+	{
+		alert("No profile found assosiated with that profile name!");
+	}
+}
+
+//Buttons And Interactions...
+shopPanel_shopBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+shopPanel_shopBtn.addEventListener('click',()=>{
+	upgradePanel.style.top="-100%";
+	shipShopPanel.style.top="55%";
+});
+
+shopPanel_upgradeBtn.addEventListener('mousemove',()=>{
+	mouseOver.play();
+});
+shopPanel_upgradeBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	upgradePanel.style.top="55%";
+	shipShopPanel.style.top="-100%";
+});
+
+scorePanel_closeBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+scorePanel_closeBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	scorePanel.style.top="-100%";
+});
+
+loadPanel_loadBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+loadPanel_newBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+
+loadPanel_loadBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	var name = loadPanel_inputBox.value;
+	checkIsExist_IN_LOCAL_GAME_DATA(name);
+});
+loadPanel_newBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	loadPanel.style.top = "-100%";
+	fillNamePanel("NEW PLAYER",false);
+});
+
+playBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+playBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	alert("Ready to travel in SPACE!?");
+	setTimeout(()=>{
+		window.location = "Assest/index.html";
+	},500);
+});
+
+loadBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+loadBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	loadPanel.style.top = "50%";
+});
+
+shopBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+shopBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	shopPanel.style.top="50%";
+	shipShopPanel.style.top="55%";
+});
+
+howBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+howBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	howToPlayPanel.style.top="50%";
+});
+
+howToPlayPanel_closeBtn.addEventListener('click',()=>{
+	howToPlayPanel.style.top="-100%";
+});
+
+scoreBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+scoreBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	scorePanel.style.top = "50%";
+});
+
+shopPanel_backBtn.addEventListener('mouseover',()=>{
+	mouseOver.play();
+});
+shopPanel_backBtn.addEventListener('click',()=>{
+	mouseDown.play();
+	shipShopPanel.style.top="-100%";
+	shopPanel.style.top="-100%";
+});
+
+for(let i=0;i<250;i++)
+{
+	let x,y,radius,speed,distance,isExist=false;
+	x=Math.random()* canvas.width;
+	y=Math.random()* canvas.height;
+	radius=Math.random()*3 + 2;
+	speed = Math.random()*1 + 0.2;
+
+	if(starsArray.length>2)
+	{
+		for(let j=0;j<starsArray.length;j++)
+		{
+			distance=Math.hypot(x-starsArray[j].x,y-starsArray[j].y);
+			if(distance<radius+starsArray[j].radius)
+			{
+				isExist = true;
+			}
+		}
+		if (!isExist) 
+		{
+			starsArray.push(new bgStart(x,y,radius,speed));
+		}
+	}
+	else
+	{
+		starsArray.push(new bgStart(x,y,radius,speed));
+	}
+}
+
+function buySkin(a,b,c,d)
+{
+	//alert(" "+a+" "+b+" "+c);
+	if(isLoaded)
+	{
+		if(isPlayer)
+		{
+			buyInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp;"+a+"&nbsp;&nbsp;</mark> Gold Coin, <mark>&nbsp;&nbsp;"+b+"&nbsp;&nbsp;</mark> Silver Coin And <mark>&nbsp;&nbsp;"+c+"&nbsp;&nbsp;</mark> Bronze Coin. Press Buy Button For Buy This Ship Otherwise Press Cancel Button!";
+			skinBuyPanel.style.top="50%";
+			tradeObj._GOLD_COIN = a;
+			tradeObj._SILVER_COIN = b;
+			tradeObj._BRONZE_COIN = c;
+			tradeObj._SHIP_NO = d;
+		}
+		else
+		{
+			alert("Please play one game to earn flying coins to buy anything from shop.");
+		}
+	}
+	else
+	{
+		alert("Please load your profile to buy the skin!");
+	}
+}
+
+function activateSkin(a)
+{
+	switch(a)
+	{
+		case 0:
+		{
+			_RECENT_PLAYER._CURRENT_SHIP = "default";
+			alert("You are using 'THE RED KING' ship currently!");
+			console.log("DONE0");
+		}
+		break;
+
+		case 1:
+		{
+			_RECENT_PLAYER._CURRENT_SHIP = "ship0";
+			alert("You are using 'THE GREEN LANTERN' ship currently!");
+			console.log("DONE1");
+		}
+		break;
+
+		case 2:
+		{
+			_RECENT_PLAYER._CURRENT_SHIP = "ship1";
+			alert("You are using 'THE BLUE ICONIC' ship currently!");
+			console.log("DONE2");
+		}
+		break;
+
+		case 3:
+		{
+			_RECENT_PLAYER._CURRENT_SHIP = "ship2";
+			alert("You are using 'THE DESTROYER' ship currently!");
+			console.log("DONE3");
+		}
+		break;
+
+		case 4:
+		{
+			_RECENT_PLAYER._CURRENT_SHIP = "ship3";
+			alert("You are using 'THE LUMBERJACK' ship currently!");
+			console.log("DONE4");
+		}
+		break;
+
+		case 5:
+		{
+			_RECENT_PLAYER._CURRENT_SHIP = "ship4";
+			alert("You are using 'THE ELITE' ship currently!");
+			console.log("DONE5");
+		}
+		break;
+	};
+	UpdateLocalStorage();
+	console.log("DONE");
+}
+
+function upgradePerks(a)
+{
+	if(isLoaded)
+	{
+		if(isPlayer)
+		{
+			switch(a)
+			{
+				case 0:
+				{
+					//alert(_RECENT_PLAYER._POWERUPS_UPGRADE[1]._NAME);
+					if(_RECENT_PLAYER._POWERUPS_UPGRADE[1]._POWER==20)
+					{
+						upgradeInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp; 5 &nbsp;&nbsp;</mark> Gold Coins, <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Silver Coins And <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Bronze Coins For this upgrade! Your power will increase 5 points. Press Upgrade for upgrade this perk OR press Cancel.";
+						upgradePerksPanel.style.top="50%";
+						upgradeObj = {
+							_GOLD_COIN : 5,
+							_SILVER_COIN : 3,
+							_BRONZE_COIN : 3,
+							_UPGRADE : ["POWER",5]
+						}
+					}
+					else if(_RECENT_PLAYER._POWERUPS_UPGRADE[1]._POWER<30)
+					{
+						upgradeInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp; 5 &nbsp;&nbsp;</mark> Gold Coins, <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Silver Coins And <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Bronze Coins For this upgrade! Your power will increase 5 points. Press Upgrade for upgrade this perk OR press Cancel.";
+						upgradePerksPanel.style.top="50%";
+						upgradeObj = {
+							_GOLD_COIN : 5,
+							_SILVER_COIN : 3,
+							_BRONZE_COIN : 3,
+							_UPGRADE : ["POWER",5]
+						}
+					}
+					else if(_RECENT_PLAYER._POWERUPS_UPGRADE[1]._POWER<40)
+					{
+						upgradeInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp; 8 &nbsp;&nbsp;</mark> Gold Coins, <mark>&nbsp;&nbsp; 5 &nbsp;&nbsp;</mark> Silver Coins And <mark>&nbsp;&nbsp; 5 &nbsp;&nbsp;</mark> Bronze Coins For this upgrade! Your power will increase 5 points. Press Upgrade for upgrade this perk OR press Cancel.";
+						upgradePerksPanel.style.top="50%";
+						upgradeObj = {
+							_GOLD_COIN : 8,
+							_SILVER_COIN : 5,
+							_BRONZE_COIN : 5,
+							_UPGRADE : ["POWER",5]
+						}
+					}
+					else
+					{
+						alert("This perk is already maxed!");
+					}
+				}
+				break;
+
+				case 1:
+				{
+					//alert(_RECENT_PLAYER._POWERUPS_UPGRADE[0]._NAME);
+					if (_RECENT_PLAYER._POWERUPS_UPGRADE[0]._TYPE[0]._DURATION==20) 
+					{
+						upgradeInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp; 5 &nbsp;&nbsp;</mark> Gold Coins, <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Silver Coins And <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Bronze Coins For this upgrade! Your sheild duration increase 10%. Press Upgrade for upgrade this perk OR press Cancel.";
+						upgradePerksPanel.style.top="50%";
+						upgradeObj = {
+							_GOLD_COIN : 5,
+							_SILVER_COIN : 3,
+							_BRONZE_COIN : 3,
+							_UPGRADE : ["SHEILD",1]
+						}
+					}
+					else if(_RECENT_PLAYER._POWERUPS_UPGRADE[0]._TYPE[0]._DURATION==19)
+					{
+						upgradeInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp; 8 &nbsp;&nbsp;</mark> Gold Coins, <mark>&nbsp;&nbsp; 8 &nbsp;&nbsp;</mark> Silver Coins And <mark>&nbsp;&nbsp; 8 &nbsp;&nbsp;</mark> Bronze Coins For this upgrade! Your sheild duration increase 50%. Press Upgrade for upgrade this perk OR press Cancel.";
+						upgradePerksPanel.style.top="50%";
+						upgradeObj = {
+							_GOLD_COIN : 8,
+							_SILVER_COIN : 8,
+							_BRONZE_COIN : 8,
+							_UPGRADE : ["SHEILD",2]
+						}
+					}
+					else if(_RECENT_PLAYER._POWERUPS_UPGRADE[0]._TYPE[0]._DURATION==17)
+					{
+						upgradeInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp; 15 &nbsp;&nbsp;</mark> Gold Coins, <mark>&nbsp;&nbsp; 15 &nbsp;&nbsp;</mark> Silver Coins And <mark>&nbsp;&nbsp; 15 &nbsp;&nbsp;</mark> Bronze Coins For this upgrade! Your sheild duration increase 100%. Press Upgrade for upgrade this perk OR press Cancel.";
+						upgradePerksPanel.style.top="50%";
+						upgradeObj = {
+							_GOLD_COIN : 15,
+							_SILVER_COIN : 15,
+							_BRONZE_COIN : 15,
+							_UPGRADE : ["SHEILD",4]
+						}
+					}
+					else
+					{
+						alert("This perk is already maxed!");
+					}
+
+				}
+				break;
+
+				case 2:
+				{
+					//alert(_RECENT_PLAYER._POWERUPS_UPGRADE[2]._NAME);
+					if(_RECENT_PLAYER._POWERUPS_UPGRADE[2]._EXTRA_POINTS==30)
+					{
+						upgradeInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp; 5 &nbsp;&nbsp;</mark> Gold Coins, <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Silver Coins And <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Bronze Coins For this upgrade! Your extra points will increase 5 points. Press Upgrade for upgrade this perk OR press Cancel.";
+						upgradePerksPanel.style.top="50%";
+						upgradeObj = {
+							_GOLD_COIN : 5,
+							_SILVER_COIN : 3,
+							_BRONZE_COIN : 3,
+							_UPGRADE : ["_EXTRA_POINTS",5]
+						}
+					}
+					else if(_RECENT_PLAYER._POWERUPS_UPGRADE[2]._EXTRA_POINTS<40)
+					{
+						upgradeInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp; 5 &nbsp;&nbsp;</mark> Gold Coins, <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Silver Coins And <mark>&nbsp;&nbsp; 3 &nbsp;&nbsp;</mark> Bronze Coins For this upgrade! Your extra points will increase 5 points. Press Upgrade for upgrade this perk OR press Cancel.";
+						upgradePerksPanel.style.top="50%";
+						upgradeObj = {
+							_GOLD_COIN : 5,
+							_SILVER_COIN : 3,
+							_BRONZE_COIN : 3,
+							_UPGRADE : ["_EXTRA_POINTS",5]
+						}
+					}
+					else if(_RECENT_PLAYER._POWERUPS_UPGRADE[2]._EXTRA_POINTS<50)
+					{
+						upgradeInfo.innerHTML = "You will trade <mark>&nbsp;&nbsp; 10 &nbsp;&nbsp;</mark> Gold Coins, <mark>&nbsp;&nbsp; 10 &nbsp;&nbsp;</mark> Silver Coins And <mark>&nbsp;&nbsp; 10 &nbsp;&nbsp;</mark> Bronze Coins For this upgrade! Your extra points will increase 10 points. Press Upgrade for upgrade this perk OR press Cancel.";
+						upgradePerksPanel.style.top="50%";
+						upgradeObj = {
+							_GOLD_COIN : 10,
+							_SILVER_COIN : 10,
+							_BRONZE_COIN : 10,
+							_UPGRADE : ["_EXTRA_POINTS",10]
+						}
+					}
+					else
+					{
+						alert("This perk is already maxed!");
+					}
+				}
+				break;
+			};
+		}
+		else
+		{
+			alert("Please play at least one game and collect some currency for upgrade!");
+		}
+	}
+	else
+	{
+		alert("Please load your profile for using this feature!");
+	}
+}
+
+function buy()
+{
+	//alert(tradeObj._GOLD_COIN+" "+tradeObj._SILVER_COIN+" "+tradeObj._BRONZE_COIN);
+	if(_RECENT_PLAYER._GOLD_COIN_HAVE<tradeObj._GOLD_COIN || _RECENT_PLAYER._SILVER_COIN_HAVE<tradeObj._SILVER_COIN || _RECENT_PLAYER._BRONZE_COIN_HAVE<tradeObj._BRONZE_COIN)
+	{
+		alert("You cannot buy this ship due to lack of currency! Play more games to earn more and come again.");
+	}
+	else
+	{
+		alert("Congratulations! You just have bought a new ship.");
+		switch(tradeObj._SHIP_NO)
+		{
+			case 1:
+			{
+				_RECENT_PLAYER._SHIP_COLLECTION.push("ship0");
+				activeBtn1.style.display = "block";
+				btn1.style.display="none";
+			}
+			break;
+
+			case 2:
+			{
+				_RECENT_PLAYER._SHIP_COLLECTION.push("ship1");
+				activeBtn2.style.display = "block";
+				btn2.style.display="none";
+			}
+			break;
+
+			case 3:
+			{
+				_RECENT_PLAYER._SHIP_COLLECTION.push("ship2");
+				activeBtn3.style.display = "block";
+				btn3.style.display="none";
+			}
+			break;
+
+			case 4:
+			{
+				_RECENT_PLAYER._SHIP_COLLECTION.push("ship3");
+				activeBtn4.style.display = "block";
+				btn4.style.display="none";
+			}
+			break;
+
+			case 5:
+			{
+				_RECENT_PLAYER._SHIP_COLLECTION.push("ship4");
+				activeBtn5.style.display = "block";
+				btn5.style.display="none";		
+			}
+			break;
+		};
+		_RECENT_PLAYER._GOLD_COIN_HAVE -= tradeObj._GOLD_COIN;
+		_RECENT_PLAYER._SILVER_COIN_HAVE -= tradeObj._SILVER_COIN;
+		_RECENT_PLAYER._BRONZE_COIN_HAVE -= tradeObj._BRONZE_COIN;
+		UpdateLocalStorage();
+	}
+}
+
+function upgrade()
+{
+	//alert(upgradeObj._GOLD_COIN+" "+upgradeObj._SILVER_COIN+" "+upgradeObj._BRONZE_COIN);
+	if(_RECENT_PLAYER._GOLD_COIN_HAVE<upgradeObj._GOLD_COIN || _RECENT_PLAYER._SILVER_COIN_HAVE<upgradeObj._SILVER_COIN || _RECENT_PLAYER._BRONZE_COIN_HAVE < upgradeObj._BRONZE_COIN)
+	{
+		alert("You do not have enough resources to upgrade this perk! Please earn more resources and try again!");
+	}
+	else
+	{
+		//upgradePerk(upgradeObj._GOLD_COIN,upgradeObj._SILVER_COIN,upgradeObj._BRONZE_COIN);
+		_RECENT_PLAYER._GOLD_COIN_HAVE -= upgradeObj._GOLD_COIN;
+		_RECENT_PLAYER._SILVER_COIN_HAVE -= upgradeObj._SILVER_COIN;
+		_RECENT_PLAYER._BRONZE_COIN_HAVE -= upgradeObj._BRONZE_COIN;
+		if(upgradeObj._UPGRADE[0]=="POWER")
+		{
+			_RECENT_PLAYER._POWERUPS_UPGRADE[1]._POWER += upgradeObj._UPGRADE[1];
+		}
+		else if(upgradeObj._UPGRADE[0]=="SHEILD")
+		{
+			_RECENT_PLAYER._POWERUPS_UPGRADE[0]._TYPE[0]._DURATION -= upgradeObj._UPGRADE[1];
+			_RECENT_PLAYER._POWERUPS_UPGRADE[0]._TYPE[1]._DURATION -= upgradeObj._UPGRADE[1];
+			_RECENT_PLAYER._POWERUPS_UPGRADE[0]._TYPE[2]._DURATION -= upgradeObj._UPGRADE[1];
+			_RECENT_PLAYER._POWERUPS_UPGRADE[0]._TYPE[3]._DURATION -= upgradeObj._UPGRADE[1];
+		}
+		else
+		{
+			_RECENT_PLAYER._POWERUPS_UPGRADE[2]._EXTRA_POINTS += upgradeObj._UPGRADE[1];
+		}
+		upgradePerksPanel.style.top="-100%";
+		upgradeSound.play();
+		UpdateLocalStorage();
+		alert("Perk has been upgraded!");
+	}
+}
+
+function cancel()
+{
+	skinBuyPanel.style.top="-100%";
+}
+
+function btnCancel()
+{
+	upgradePerksPanel.style.top="-100%";
+}
+
+function mainLoop() 
+{
+	anim_ID = requestAnimationFrame(mainLoop);
+	c.clearRect(0,0,canvas.width,canvas.height);
+	c.fillStyle = 'rgba(0,0,0,0.88)';
+	c.fillRect(0,0,canvas.width,canvas.height);
+
+	starsArray.forEach((star,index)=>{
+		star.update();
+	});
+	planet.update();
+	if(hasToShow)
+	{
+		UpdateCurrency();
+	}
+}
+
+window.addEventListener('load',()=>{
+	mainLoop();
+	UpdateWallOfFame();
+	playBgMusic();
+});
+
+//});
+
+</script>
+</html>
