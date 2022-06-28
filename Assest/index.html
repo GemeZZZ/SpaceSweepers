@@ -353,7 +353,9 @@ function playBgMusic()
 }
 
 window.addEventListener('load',() => {
-	playBgMusic();
+	window.setTimeout(()=>{
+		playBgMusic();
+	},1000);
 });
 
 function GAMEOVER()
@@ -1049,6 +1051,7 @@ ip_btn_play.addEventListener('click',()=>{
 	spawnRocks();
 	ready=true;
 	mouseDown.play();
+	playBgMusic();
 });
 
 window.addEventListener('mousemove',(e) => {
