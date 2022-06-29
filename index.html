@@ -723,6 +723,7 @@ function upgradeUpgradeShop()
 
 function UpdateWallOfFame()
 {
+	let inHTML = '';
 	let rank = 1;
 	for(let i=0;i<_GAME_DATA.length;i++)
 	{
@@ -740,9 +741,10 @@ function UpdateWallOfFame()
 
 	for(let k=0;k<_GAME_DATA.length;k++)
 	{
-		tableBody.innerHTML += "<tr><td>"+rank+"</td><td>"+_GAME_DATA[k]._PLAYER_NAME+"</td><td>"+_GAME_DATA[k]._PLAYER_BEST_SCORE+"</td><td>"+_GAME_DATA[k]._GOLD_COIN_HAVE+"</td><td>"+_GAME_DATA[k]._SILVER_COIN_HAVE+"</td><td>"+_GAME_DATA[k]._BRONZE_COIN_HAVE+"</td></tr>";
+		inHTML += "<tr><td>"+rank+"</td><td>"+_GAME_DATA[k]._PLAYER_NAME+"</td><td>"+_GAME_DATA[k]._PLAYER_BEST_SCORE+"</td><td>"+_GAME_DATA[k]._GOLD_COIN_HAVE+"</td><td>"+_GAME_DATA[k]._SILVER_COIN_HAVE+"</td><td>"+_GAME_DATA[k]._BRONZE_COIN_HAVE+"</td></tr>";
 		rank++;
 	}
+	tableBody.innerHTML = inHTML;
 }
 
 function UpdateShipShop()
@@ -793,6 +795,7 @@ function UpdateLocalStorage()
 		}
 	}
 	_CURRENT_PLAYER = localStorage.setItem("_CURRENT_PLAYER",JSON.stringify(_RECENT_PLAYER));
+	_LOCAL_DATA = JSON.parse(localStorage.getItem("_SPACE_SWEEPERS_LOCAL_DATA"));
 }
 
 //Functions....
