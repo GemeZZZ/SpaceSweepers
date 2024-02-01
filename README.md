@@ -15,6 +15,9 @@
 - You can use this project for your reference if you want to start your game developement learning.
 - However you are not allowed to sell this game anywhere and/or you cannot grab rights on it.
 
+## How to download and start playing
+[![Watch Trailer](https://img.youtube.com/vi/OOetMH2mCCY/0.jpg)](https://www.youtube.com/watch?v=OOetMH2mCCY)
+
 ## Connect With Me
 <a href = "https://linkedin.com/in/henil-mistry-91a412208"><img src="https://img.icons8.com/fluent/48/000000/linkedin.png"/></a>
 <a href = "https://twitter.com/HenuMistry"><img src="https://img.icons8.com/fluent/48/000000/twitter.png"/></a>
